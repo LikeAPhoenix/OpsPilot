@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OpsPilot - 登录 / 注册</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- 引入全局变量、通用及Auth专属样式 -->
+    <link rel="stylesheet" href="./src/css/variables.css" />
+    <link rel="stylesheet" href="./src/css/auth.css" />
+  </head>
+  <body>
+    <div class="auth-container">
+      <div class="auth-glass-panel">
+        <div class="auth-header">
+          <h1 class="auth-title">OpsPilot</h1>
+          <p class="auth-subtitle">智能运维助手</p>
+        </div>
+
+        <!-- 登录表单 -->
+        <form id="loginForm" class="auth-form active">
+          <div class="input-group">
+            <label for="loginUsername">用户名</label>
+            <input type="text" id="loginUsername" placeholder="输入用户名" required autocomplete="username" />
+          </div>
+          <div class="input-group">
+            <label for="loginPassword">密码</label>
+            <input type="password" id="loginPassword" placeholder="输入密码" required autocomplete="current-password" />
+          </div>
+          <button type="submit" class="btn primary-btn" id="loginBtn">登 录</button>
+          <div class="auth-footer">
+            <span>还没有账号？</span>
+            <button type="button" class="text-btn toggle-form-btn" data-target="register">立即注册</button>
+          </div>
+        </form>
+
+        <!-- 注册表单 -->
+        <form id="registerForm" class="auth-form">
+          <div class="input-group">
+            <label for="regUsername">用户名</label>
+            <input type="text" id="regUsername" placeholder="建议使用拼音或字母" required autocomplete="username" />
+          </div>
+          <div class="input-group">
+            <label for="regPassword">密码</label>
+            <input type="password" id="regPassword" placeholder="设置密码 (不少于6位)" required autocomplete="new-password" />
+          </div>
+          <button type="submit" class="btn primary-btn" id="registerBtn">注 册</button>
+          <div class="auth-footer">
+            <span>已经有账号？</span>
+            <button type="button" class="text-btn toggle-form-btn" data-target="login">返回登录</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- 全局 Loading 提示 -->
+    <div id="authLoading" class="global-loading hidden">
+      <div class="spinner"></div>
+    </div>
+    
+    <!-- Toast 通知 -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script type="module" src="./src/js/auth.js"></script>
+  </body>
+</html>

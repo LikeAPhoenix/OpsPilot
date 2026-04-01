@@ -1,0 +1,8 @@
+.vscode/
+*log
+output/
+temp/
+bin
+
+deploy/docker/volumes
+configs/config.yaml

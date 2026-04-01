@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OpsPilot - 工作台</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- Styles -->
+    <link rel="stylesheet" href="./src/css/variables.css" />
+    <link rel="stylesheet" href="./src/css/layout.css" />
+    <link rel="stylesheet" href="./src/css/chat.css" />
+    <link rel="stylesheet" href="./src/css/components.css" />
+    <!-- Highlight.js Theme -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- 侧边栏 -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+          <h2 class="brand-title">OpsPilot</h2>
+          <button class="icon-btn" id="newChatBtn" title="新建对话">
+            <i data-lucide="plus-circle"></i>
+          </button>
+        </div>
+        
+        <div class="history-list-container">
+          <div class="history-section-title">会话历史</div>
+          <div class="history-list" id="chatHistoryList">
+            <!-- 动态渲染历史记录 -->
+          </div>
+        </div>
+
+        <div class="sidebar-footer">
+          <div class="user-info">
+            <i data-lucide="user"></i>
+            <span id="usernameDisplay">User</span>
+          </div>
+          <button class="icon-btn" id="logoutBtn" title="退出登录">
+            <i data-lucide="log-out"></i>
+          </button>
+        </div>
+      </aside>
+
+      <!-- 主区域 -->
+      <main class="main-content">
+        <!-- 顶部工具栏 -->
+        <header class="topbar">
+          <button class="icon-btn mobile-menu-btn" id="mobileMenuBtn">
+            <i data-lucide="menu"></i>
+          </button>
+          
+          <div class="topbar-actions">
+            <!-- AIOps 触发 -->
+            <button class="btn accent-btn aiops-btn" id="aiopsBtn">
+              <i data-lucide="activity"></i>
+              AIOps 分析
+            </button>
+            
+            <!-- 模式切换 -->
+            <div class="dropdown" id="modeDropdownWrapper">
+              <button class="dropdown-trigger" id="modeSelectorBtn">
+                <i data-lucide="zap"></i>
+                <span id="currentModeText">快速</span>
+                <i data-lucide="chevron-down" class="dropdown-icon"></i>
+              </button>
+              <div class="dropdown-menu" id="modeMenu">
+                <div class="dropdown-item active" data-mode="quick">快速对话 (完整返回)</div>
+                <div class="dropdown-item" data-mode="stream">流式对话 (打字机效果)</div>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <!-- 聊天流 -->
+        <div class="chat-container">
+          <div class="chat-messages" id="chatMessages">
+            <div class="welcome-box hidden" id="welcomeBox">
+              <i data-lucide="bot" class="welcome-icon"></i>
+              <h3>你好，我是 OpsPilot</h3>
+              <p>你可以上传知识库文档，或直接提问运维相关问题。</p>
+            </div>
+            <!-- 动态聊天气泡 -->
+          </div>
+
+          <!-- 输入区域 -->
+          <div class="input-container">
+            <!-- 悬浮上传列表预览区 (保留供后续拓展) -->
+            <div class="upload-preview hidden" id="uploadPreview"></div>
+            
+            <div class="input-wrapper">
+              <button class="icon-btn tool-btn" id="uploadFileBtn" title="上传知识文档 (.md, .txt)">
+                <i data-lucide="paperclip"></i>
+              </button>
+              <input type="file" id="fileInput" accept=".md,.markdown,.txt" class="hidden" />
+              
+              <textarea 
+                id="messageInput" 
+                class="message-input" 
+                placeholder="在此输入问题，Enter 发送，Shift + Enter 换行..."
+                rows="1"
+              ></textarea>
+              
+              <button class="btn primary-btn send-btn" id="sendBtn" title="发送 (Enter)">
+                <i data-lucide="send"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+
+    <!-- Toast Notifications -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script type="module" src="./src/js/main.js"></script>
+    <script type="module" src="./src/js/chat.js"></script>
+    <script type="module" src="./src/js/aiops.js"></script>
+  </body>
+</html>

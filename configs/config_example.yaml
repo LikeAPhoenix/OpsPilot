@@ -1,0 +1,61 @@
+server:
+  address: ":6872"
+
+logger:
+  level: "debug"
+  encoding: "console"
+  development: true
+  log_file: "./logs/opspilot.log"
+
+think_chat_model:
+  provider: "ark"
+  api_key: "xxxxx"
+  base_url: "https://ark.cn-beijing.volces.com/api/v3"
+  model: "doubao-seed-2-0-lite-260215"
+
+quick_chat_model:
+  provider: "ark"
+  api_key: "xxxxx"
+  base_url: "https://ark.cn-beijing.volces.com/api/v3"
+  model: "doubao-seed-2-0-mini-260215"
+
+embedding_model:
+  provider: "ark"
+  api_key: "xxxxx"
+  base_url: "https://ark.cn-beijing.volces.com/api/v3"
+  model: "doubao-embedding-vision-251215"
+  api_type: "multimodal"
+
+file_dir: "./docs/knowledge"
+
+mcp:
+  url: "http://127.0.0.1:19092/sse"
+
+milvus:
+  address: "localhost:19530"
+  default_db: "default"
+  database: "agent"
+  collection: "biz"
+
+prometheus:
+  base_url: "http://127.0.0.1:19090"
+
+mysql:
+  dsn: "root:root1234@tcp(127.0.0.1:3306)/opspilot?charset=utf8mb4&parseTime=True&loc=Local"
+
+redis:
+  address: "127.0.0.1:6379"
+  password: "root1234"
+  db: 0
+
+auth:
+  jwt_secret: "change-me"
+  access_token_ttl: "2h"
+
+session:
+  retain_turns: 6
+  compact_threshold_turns: 9
+  ttl: "72h"
+
+snowflake:
+  node_id: 1

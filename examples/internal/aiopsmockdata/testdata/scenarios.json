@@ -1,0 +1,171 @@
+{
+  "empty": {
+    "alerts": [],
+    "logs": []
+  },
+  "multiple": {
+    "alerts": [
+      {
+        "labels": {
+          "alertname": "服务下线",
+          "severity": "critical",
+          "service": "billing-worker",
+          "instance": "billing-worker-0"
+        },
+        "annotations": {
+          "summary": "账单服务发生 panic 并触发重启",
+          "description": "billing-worker 在过去 15 分钟内出现 panic，服务实例反复重启，需要结合日志定位根因。"
+        },
+        "state": "firing",
+        "activeAgo": "18m",
+        "value": "1e+00"
+      },
+      {
+        "labels": {
+          "alertname": "发现服务地域与资源地域不匹配",
+          "severity": "warning",
+          "service": "billing-sync",
+          "instance": "billing-sync-0"
+        },
+        "annotations": {
+          "summary": "资源事件投递到了错误地域",
+          "description": "billing-sync 在同步资源事件时发现服务地域与资源地域不匹配，需要排查错误投递来源。"
+        },
+        "state": "firing",
+        "activeAgo": "11m",
+        "value": "1e+00"
+      }
+    ],
+    "logs": [
+      {
+        "timestampAgo": "17m",
+        "level": "ERROR",
+        "message": "panic recovered in billing-worker: runtime error: invalid memory address or nil pointer dereference",
+        "region": "ap-guangzhou",
+        "topic_id": "869830db-a055-4479-963b-3c898d27e755",
+        "keywords": [
+          "panic",
+          "billing-worker",
+          "nil pointer",
+          "runtime error"
+        ],
+        "metadata": {
+          "service": "billing-worker",
+          "instance": "billing-worker-0",
+          "trace_id": "trace-panic-001"
+        }
+      },
+      {
+        "timestampAgo": "16m",
+        "level": "ERROR",
+        "message": "panic stack trace api.go:128 processBillTask caused worker restart",
+        "region": "ap-guangzhou",
+        "topic_id": "869830db-a055-4479-963b-3c898d27e755",
+        "keywords": [
+          "panic",
+          "stack trace",
+          "worker restart"
+        ],
+        "metadata": {
+          "service": "billing-worker",
+          "instance": "billing-worker-0",
+          "trace_id": "trace-panic-002"
+        }
+      },
+      {
+        "timestampAgo": "10m",
+        "level": "WARN",
+        "message": "region mismatch detected caller=inventory-sync service_region=ap-guangzhou resource_region=ap-shanghai",
+        "region": "ap-guangzhou",
+        "topic_id": "869830db-a055-4479-963b-3c898d27e755",
+        "keywords": [
+          "region mismatch",
+          "inventory-sync",
+          "ap-guangzhou",
+          "ap-shanghai"
+        ],
+        "metadata": {
+          "service": "billing-sync",
+          "instance": "billing-sync-0",
+          "trace_id": "trace-region-001"
+        }
+      },
+      {
+        "timestampAgo": "9m",
+        "level": "ERROR",
+        "message": "mq route misconfigured, event for resource region ap-shanghai was delivered to ap-guangzhou queue",
+        "region": "ap-guangzhou",
+        "topic_id": "869830db-a055-4479-963b-3c898d27e755",
+        "keywords": [
+          "region mismatch",
+          "mq route",
+          "resource region",
+          "wrong queue"
+        ],
+        "metadata": {
+          "service": "billing-sync",
+          "instance": "billing-sync-0",
+          "trace_id": "trace-region-002"
+        }
+      }
+    ]
+  },
+  "single": {
+    "alerts": [
+      {
+        "labels": {
+          "alertname": "接口失败率过高",
+          "severity": "critical",
+          "service": "ops-api",
+          "instance": "ops-api-0"
+        },
+        "annotations": {
+          "summary": "计费查询接口错误率升高",
+          "description": "ops-api 在过去 5 分钟内错误率持续高于阈值，需要尽快排查接口调用链和应用日志。"
+        },
+        "state": "firing",
+        "activeAgo": "8m",
+        "value": "1e+00"
+      }
+    ],
+    "logs": [
+      {
+        "timestampAgo": "7m",
+        "level": "ERROR",
+        "message": "api=GetBillingDetail response error code=12000000003 downstream=account-service err=\"timeout waiting for downstream response\"",
+        "region": "ap-guangzhou",
+        "topic_id": "869830db-a055-4479-963b-3c898d27e755",
+        "keywords": [
+          "GetBillingDetail",
+          "response",
+          "error",
+          "12000000003",
+          "downstream timeout"
+        ],
+        "metadata": {
+          "service": "ops-api",
+          "instance": "ops-api-0",
+          "trace_id": "trace-api-001"
+        }
+      },
+      {
+        "timestampAgo": "6m",
+        "level": "WARN",
+        "message": "api=GetBillingDetail response cost=3120ms upstream_status=200 downstream_status=504 retry=2",
+        "region": "ap-guangzhou",
+        "topic_id": "869830db-a055-4479-963b-3c898d27e755",
+        "keywords": [
+          "GetBillingDetail",
+          "response",
+          "504",
+          "latency"
+        ],
+        "metadata": {
+          "service": "ops-api",
+          "instance": "ops-api-0",
+          "trace_id": "trace-api-002"
+        }
+      }
+    ]
+  }
+}
